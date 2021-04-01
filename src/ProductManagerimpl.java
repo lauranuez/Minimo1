@@ -20,16 +20,32 @@ public class ProductManagerimpl implements ProductManager{
 
     @Override
     public List<Product> getProductByPrize() {
-        return null;
+        List<Product> p = null;
+        for (int i = 0; i < listProduct.size(); i++){
+            for (int j = 0; j < listProduct.size(); j++){
+                if (listProduct.get(i).getPrice()<listProduct.get(j).getPrice()) {
+                    p.remove(i);
+                    p.add(i, listProduct.get(i));
+                }
+            }
+        }
+        return p;
+    }
+
+
+
+    @Override
+    public List<Order> getOrdersByUser(int userId) {
+        List<Order> userOrders = null;
+        for (int i = 0; i < listOrder.size(); i++){
+            if (listOrder.get(i).getUserId() == userId)
+                userOrders.add(i,listOrder.get(i));
+        }
     }
 
     @Override
-    public List<Order> getOrdersByUser() {
-        return null;
-    }
-
-    @Override
-    public void newOrder(Order o) {
+    public newOrder(List<Product> p, User user) {
+        Order order = new Order(p, user);
 
     }
 
@@ -40,6 +56,15 @@ public class ProductManagerimpl implements ProductManager{
 
     @Override
     public List<Product> getProductBySales() {
-        return null;
+        List<Product> p = null;
+        for (int i = 0; i < listProduct.size(); i++){
+            for (int j = 0; j < listProduct.size(); j++){
+                if (listProduct.get(i).getSales()>listProduct.get(j).getSales()) {
+                    p.remove(i);
+                    p.add(i, listProduct.get(i));
+                }
+            }
+        }
+        return p;
     }
 }

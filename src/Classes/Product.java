@@ -2,7 +2,48 @@ package Classes;
 
 public class Product {
 
-    private int id;
+    private int id = 0;
+    private String name;
     private float price;
-    private int cant;
+    private int sales = 0;
+
+    public Product(String name, float price) {
+        this.name = name;
+        this.price = price;
+        this.id ++;
+    }
+
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public void setSales() {
+        this.sales++;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public int getSales() {
+        return sales;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+
+
+
+
 }
