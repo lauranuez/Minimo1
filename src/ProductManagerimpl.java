@@ -2,6 +2,7 @@ import Classes.Order;
 import Classes.User;
 import Classes.Product;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Queue;
 import java.util.List;
@@ -13,6 +14,19 @@ public class ProductManagerimpl implements ProductManager{
     private List<Order> listOrderDone;
     private HashMap<String, User > hmUsers = new HashMap<String,User>();
 
+
+   public ProductManagerimpl () {
+
+       Product product1 = new Product("coca", 2);
+       Product product2 = new Product("pan", 1);
+       Product product3 = new Product("bocadillo de lomo", 4);
+       Product product4 = new Product("patatas", 3);
+
+       listProduct.add(product1);
+       listProduct.add(product2);
+       listProduct.add(product3);
+       listProduct.add(product4);
+   }
 
 
     @Override
