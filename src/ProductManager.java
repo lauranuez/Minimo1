@@ -8,10 +8,10 @@ import Classes.Order;
 public interface ProductManager {
 
     public List<Product> getProductByPrize();
-    public List<Order> getOrdersByUser(int userId);
-    public Order newOrder(List<Product> p, User user);
+    public List<Order> getOrdersByUser(String userId);
+    public void newOrder(Order o);
     public Order processOrder();
     public List<Product> getProductBySales();
 
-    }
+
 }

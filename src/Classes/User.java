@@ -1,29 +1,59 @@
 package Classes;
 
+import java.util.List;
+
 public class User {
 
-    private int id;
-    private String name;
+    private String userId;
+    private List <Order> listOrders=null;
 
-    public User(String name){
-        this.name = name;
+
+    private List <Order> listOrdersDone=null;
+
+    public User(String name)
+    {
+        this.userId=name;
     }
 
-    public int getId() {
-        return id;
+
+
+    public List<Order> getListOrders() {
+        return listOrders;
     }
 
-    public String getName() {
-        return name;
+
+    public void setListOrders(List<Order> listOrders) {
+        this.listOrders = listOrders;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void addOrder(Order order) {
+        listOrders.add(order);
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void addOrderDone(Order order) {
+        listOrdersDone.add(order);
     }
+
+    public String getId() {
+        return userId;
+    }
+
+    public void setId(String userId) {
+        this.userId = userId;
+    }
+
+
+    public List<Order> getListOrdersDone() {
+        return listOrdersDone;
+    }
+
+    public void setListOrdersDone(List<Order> listOrdersDone) {
+        this.listOrdersDone = listOrdersDone;
+    }
+
+
+
+
 
 
 }
