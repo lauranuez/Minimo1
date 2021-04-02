@@ -13,32 +13,21 @@ public class Product {
 
     }
 
+    public void addSale() {
 
-
+        this.sales++;
+    }
 
     public void setPrice(float price) {
         this.price = price;
     }
-
-
-    public void addSale() {
-        this.sales++;
-    }
-
-    public void setSales(int sales) {
-        this.sales = sales;
-    }
-
-
-
+    public void setSales(int sales) { this.sales = sales; }
     public float getPrice() {
         return price;
     }
-
     public int getSales() {
         return sales;
     }
-
     public String getName() {
         return name;
     }

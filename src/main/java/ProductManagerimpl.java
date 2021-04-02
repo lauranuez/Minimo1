@@ -2,20 +2,15 @@ import Classes.Order;
 import Classes.User;
 import Classes.Product;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Queue;
-import java.util.List;
+import java.util.*;
 
 public class ProductManagerimpl implements ProductManager{
-
-    private Queue<Order> pendingOrder;
+    private Queue<Order> pendingOrder = new LinkedList<>();
     private List<Product> listProduct;
     private HashMap<String, User > hmUsers = new HashMap<String,User>();
-
+    private int cont = 0;
 
    public ProductManagerimpl () {
-
        Product product1 = new Product("coca", 2);
        Product product2 = new Product("pan", 1);
        Product product3 = new Product("bocadillo de lomo", 4);
@@ -29,10 +24,9 @@ public class ProductManagerimpl implements ProductManager{
 
        User user = new User("Juan");
        User user2 = new User("Maria");
-
-
+       hmUsers.put("Juan", user);
+       hmUsers.put("Maria", user2);
    }
-
 
     @Override
     public List<Product> getProductByPrize() {
@@ -46,37 +40,30 @@ public class ProductManagerimpl implements ProductManager{
                     p.set(i,p.get(j));
                     p.set(j, product);
                 }
-
             }
         }
         return p;
     }
-
     @Override
     public List<Order> getOrdersByUser(String userId) {
-        return hmUsers.get(userId).getListOrders();
+        return hmUsers.get(userId).getListOrdersDone();
     }
-
-
     @Override
     public void newOrder(Order o) {
-
         User user = hmUsers.get(o.getUserName());
         user.addOrder(o);
         pendingOrder.add(o);
 
-
+        o.setId(cont);
+        cont++;
     }
-
     @Override
     public Order processOrder() {
-
         Order o = pendingOrder.remove();
         User user = hmUsers.get(o.getUserName());
         user.addOrderDone(o);
 
         List<String> p = o.getProductNames();
-
         for (int i = 0 ; i < p.size(); i++){
             for (int j = 0 ; j < listProduct.size(); j++){
                 if (p.get(i) == listProduct.get(j).getName())
@@ -86,10 +73,8 @@ public class ProductManagerimpl implements ProductManager{
 
         return o;
     }
-
     @Override
     public List<Product> getProductBySales() {
-
         List<Product> p = listProduct;
         int cont = 0;
         Product product = new Product(" ",0);
@@ -100,12 +85,8 @@ public class ProductManagerimpl implements ProductManager{
                     p.set(i,p.get(j));
                     p.set(j, product);
                 }
-
             }
         }
         return p;
-
     }
-
-
 }
