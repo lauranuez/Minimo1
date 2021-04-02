@@ -15,8 +15,15 @@ public class Order {
         this.products = p;
         this.id ++;
         this.userId = user.getId();
-
     }
+/*
+    public void addProduct(String name){
+        for (int i = 0; i < products.size(); i++) {
+            if
+            products.add();
+        }
+    }
+*/
     public List<Product> getProducts() {
         return products;
     }

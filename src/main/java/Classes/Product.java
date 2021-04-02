@@ -22,8 +22,13 @@ public class Product {
         this.price = price;
     }
 
-    public void setSales() {
+
+    public void addSale() {
         this.sales++;
+    }
+
+    public void setSales(int sales) {
+        this.sales = sales;
     }
 
     public int getId() {

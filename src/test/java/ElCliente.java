@@ -1,3 +1,5 @@
+package java;
+
 import Classes.Order;
 import Classes.Product;
 import Classes.User;
@@ -8,8 +10,17 @@ import java.util.List;
 public class ElCliente {
 
     public static void main(String[] args){
-
+/*
         ProductManager pm = new ProductManagerimpl();
+
+        Order o = new Order("Juan");
+        o.addProduct("coca");
+        o.addProduct("coca");
+        o.addProduct("pan");
+
+        pm.newOrder(o);
+
+
 
         User user = new User("Juan");
         User user2 = new User("Maria");
@@ -43,7 +54,7 @@ public class ElCliente {
 
         List<Order> listOrdersJuan = pm.getOrdersByUser("Juan");
         System.out.println(listOrdersJuan);
-
+*/
 
     }
 }

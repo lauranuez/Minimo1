@@ -11,7 +11,6 @@ public class ProductManagerimpl implements ProductManager{
 
     private Queue<Order> pendingOrder;
     private List<Product> listProduct;
-    private List<Order> listOrderDone;
     private HashMap<String, User > hmUsers = new HashMap<String,User>();
 
 
@@ -22,10 +21,15 @@ public class ProductManagerimpl implements ProductManager{
        Product product3 = new Product("bocadillo de lomo", 4);
        Product product4 = new Product("patatas", 3);
 
+       listProduct = new ArrayList<>();
        listProduct.add(product1);
        listProduct.add(product2);
        listProduct.add(product3);
        listProduct.add(product4);
+
+       User user = new User("Juan");
+       User user2 = new User("Maria");
+
    }
 
 
@@ -52,6 +56,7 @@ public class ProductManagerimpl implements ProductManager{
     @Override
     public void newOrder(Order o) {
 
+
         List<Product> p = o.getProducts();
 
         User user = hmUsers.get(o.getUserId());
@@ -62,7 +67,7 @@ public class ProductManagerimpl implements ProductManager{
         for (int i = 0 ; i < p.size(); i++){
             for (int j = 1 ; j < p.size(); j++){
                 if (p.get(i).getId() == p.get(j).getId()){
-                    p.get(i).setSales();
+                    p.get(i).addSale();
                     p.remove(j);
                     j --;
                 }
@@ -73,8 +78,7 @@ public class ProductManagerimpl implements ProductManager{
 
     @Override
     public Order processOrder() {
-        Order o = pendingOrder.remove();
-        listOrderDone.add(o);
+        Order o = pendingOrder.remove();;
         User user = hmUsers.get(o.getUserId());
         user.addOrderDone(o);
         return o;
