@@ -5,36 +5,33 @@ import java.util.List;
 public class Order {
 
 
-    private List<Product> products;
+    private List<String> productNames;
     private int id = 0;
-    private String userId;
+    private String userName;
 
 
-    public Order (List <Product> p, User user)
+    public Order (String user)
     {
-        this.products = p;
         this.id ++;
-        this.userId = user.getId();
-    }
-/*
-    public void addProduct(String name){
-        for (int i = 0; i < products.size(); i++) {
-            if
-            products.add();
-        }
-    }
-*/
-    public List<Product> getProducts() {
-        return products;
+        this.userName = user;
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public void addProduct(String productName){
+
+        productNames.add(productName);
+    }
+
+    public List<String> getProductNames() {
+        return productNames;
+    }
+
+    public void setProductNames(List<String> names) {
+        this.productNames = names;
     }
 
 
-    public String getUserId() {
-        return userId;
+    public String getUserName() {
+        return userName;
     }
 
 }

@@ -2,7 +2,7 @@ package Classes;
 
 public class Product {
 
-    private int id = 0;
+
     private String name;
     private float price;
     private int sales = 0;
@@ -10,13 +10,11 @@ public class Product {
     public Product(String name, float price) {
         this.name = name;
         this.price = price;
-        this.id ++;
+
     }
 
 
-    public void setId(int id) {
-        this.id = id;
-    }
+
 
     public void setPrice(float price) {
         this.price = price;
@@ -31,9 +29,7 @@ public class Product {
         this.sales = sales;
     }
 
-    public int getId() {
-        return id;
-    }
+
 
     public float getPrice() {
         return price;

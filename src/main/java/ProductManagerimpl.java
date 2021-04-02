@@ -30,18 +30,23 @@ public class ProductManagerimpl implements ProductManager{
        User user = new User("Juan");
        User user2 = new User("Maria");
 
+
    }
 
 
     @Override
     public List<Product> getProductByPrize() {
-        List<Product> p = null;
-        for (int i = 0; i < listProduct.size(); i++){
-            for (int j = 1; j < listProduct.size(); j++){
-                if (listProduct.get(i).getPrice()<listProduct.get(j).getPrice()) {
-                    p.remove(i);
-                    p.add(i, listProduct.get(i));
+        List<Product> p = listProduct;
+        int cont = 0;
+        Product product = new Product(" ",0);
+        for (int i = 0; i < p.size()-1; i++){
+            for (int j = i+1; j <p.size(); j++){
+                if (p.get(i).getPrice()>p.get(j).getPrice()) {
+                    product = p.get(i);
+                    p.set(i,p.get(j));
+                    p.set(j, product);
                 }
+
             }
         }
         return p;
@@ -56,46 +61,50 @@ public class ProductManagerimpl implements ProductManager{
     @Override
     public void newOrder(Order o) {
 
-
-        List<Product> p = o.getProducts();
-
-        User user = hmUsers.get(o.getUserId());
+        User user = hmUsers.get(o.getUserName());
         user.addOrder(o);
         pendingOrder.add(o);
 
-
-        for (int i = 0 ; i < p.size(); i++){
-            for (int j = 1 ; j < p.size(); j++){
-                if (p.get(i).getId() == p.get(j).getId()){
-                    p.get(i).addSale();
-                    p.remove(j);
-                    j --;
-                }
-            }
-        }
 
     }
 
     @Override
     public Order processOrder() {
-        Order o = pendingOrder.remove();;
-        User user = hmUsers.get(o.getUserId());
+
+        Order o = pendingOrder.remove();
+        User user = hmUsers.get(o.getUserName());
         user.addOrderDone(o);
+
+        List<String> p = o.getProductNames();
+
+        for (int i = 0 ; i < p.size(); i++){
+            for (int j = 0 ; j < listProduct.size(); j++){
+                if (p.get(i) == listProduct.get(j).getName())
+                    listProduct.get(i).addSale();
+            }
+        }
+
         return o;
     }
 
     @Override
     public List<Product> getProductBySales() {
-        List<Product> p = null;
-        for (int i = 0; i < listProduct.size(); i++){
-            for (int j = 1; j < listProduct.size(); j++){
-                if (listProduct.get(i).getSales()>listProduct.get(j).getSales()) {
-                    p.remove(i);
-                    p.add(i, listProduct.get(i));
+
+        List<Product> p = listProduct;
+        int cont = 0;
+        Product product = new Product(" ",0);
+        for (int i = 0; i < p.size()-1; i++){
+            for (int j = i+1; j <p.size(); j++){
+                if (p.get(i).getSales()<p.get(j).getSales()) {
+                    product = p.get(i);
+                    p.set(i,p.get(j));
+                    p.set(j, product);
                 }
+
             }
         }
         return p;
+
     }
 
 
