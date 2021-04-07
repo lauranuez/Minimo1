@@ -31,6 +31,7 @@ public class ProductManagerimpl implements ProductManager{
     @Override
     public List<Product> getProductByPrize() {
         List<Product> p = listProduct;
+        /*
         int cont = 0;
         Product product = new Product(" ",0);
         for (int i = 0; i < p.size()-1; i++){
@@ -42,6 +43,15 @@ public class ProductManagerimpl implements ProductManager{
                 }
             }
         }
+*/
+        Collections.sort(p, new Comparator<Product>() {
+            @Override
+            public int compare(Product o1, Product o2) {
+               // return (int)(o2.getPrice()-o1.getPrice());
+                return Float.compare(o1.getPrice(),o2.getPrice());
+            }
+        });
+
         return p;
     }
     @Override
@@ -67,7 +77,7 @@ public class ProductManagerimpl implements ProductManager{
         for (int i = 0 ; i < p.size(); i++){
             for (int j = 0 ; j < listProduct.size(); j++){
                 if (p.get(i) == listProduct.get(j).getName())
-                    listProduct.get(i).addSale();
+                    listProduct.get(j).addSale();
             }
         }
 
@@ -76,6 +86,8 @@ public class ProductManagerimpl implements ProductManager{
     @Override
     public List<Product> getProductBySales() {
         List<Product> p = listProduct;
+
+        /*
         int cont = 0;
         Product product = new Product(" ",0);
         for (int i = 0; i < p.size()-1; i++){
@@ -87,6 +99,16 @@ public class ProductManagerimpl implements ProductManager{
                 }
             }
         }
+        return p;
+
+         */
+        Collections.sort(p, new Comparator<Product>() {
+            @Override
+            public int compare(Product o1, Product o2) {
+                return o2.getSales()-o1.getSales();
+            }
+        });
+
         return p;
     }
 }

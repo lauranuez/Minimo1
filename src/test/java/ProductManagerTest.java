@@ -50,6 +50,8 @@ public class ProductManagerTest {
 
         pm.newOrder(o3);
 
+
+
     }
     @After
     public void reset(){
@@ -72,6 +74,9 @@ public class ProductManagerTest {
     }
     @Test
     public void test4(){
+        pm.processOrder();
+        pm.processOrder();
+        pm.processOrder();
         List<Product> orden = pm.getProductBySales();
         Assert.assertEquals(product2.getName(),orden.get(1).getName());
     }
