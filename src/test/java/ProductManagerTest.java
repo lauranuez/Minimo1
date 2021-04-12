@@ -11,27 +11,35 @@ import java.util.List;
 
 public class ProductManagerTest {
 
-    ProductManager pm = new ProductManagerimpl();
+    ProductManager pm = ProductManagerimpl.getInstance();
+    private Order o1;
+    private Order o2;
+    private Order o3;
 
-    private Product product1 = new Product("coca", 2);
-    private Product product2 = new Product("pan", 1);
-    private Product product3 = new Product("bocadillo de lomo", 4);
-    private Product product4 = new Product("patatas", 3);
-    private List<Product> listProduct = new ArrayList<>();
-    private User user = new User("Juan");
-    private User user2 = new User("Maria");
-    private Order o1 = new Order("Maria");
-    private Order o2 = new Order("Juan");
-    private Order o3 = new Order("Juan");
+
 
     @Before
     public void init(){
 
-        listProduct.add(product1);
-        listProduct.add(product2);
-        listProduct.add(product3);
-        listProduct.add(product4);
+        Product product1 = new Product("coca", 2);
+        Product product2 = new Product("pan", 1);
+        Product product3 = new Product("bocadillo de lomo", 4);
+        Product product4 = new Product("patatas", 3);
 
+        pm.addProduct(product1);
+        pm.addProduct(product2);
+        pm.addProduct(product3);
+        pm.addProduct(product4);
+
+        User user = new User("Juan");
+        User user2 = new User("Maria");
+
+        pm.addUser(user);
+        pm.addUser(user2);
+
+        o1 = new Order("Maria");
+        o2 = new Order("Juan");
+        o3 = new Order("Juan");
         o1.addProduct("coca");
         o1.addProduct("coca");
         o1.addProduct("pan");
@@ -50,22 +58,25 @@ public class ProductManagerTest {
 
         pm.newOrder(o3);
 
-
-
     }
+
     @After
     public void reset(){
-        listProduct = new ArrayList<>();
+        pm.clear();
     }
+
+
     @Test
     public void test1(){
         List<Product> orden = pm.getProductByPrize();
-        Assert.assertEquals(product2.getName(), orden.get(0).getName());
+        Assert.assertEquals("pan", orden.get(0).getName());
     }
     @Test
     public void test2(){
+        User maria = pm.getUser("Maria");
+        Assert.assertNotNull(maria);
         List<Product> orden = pm.getProductBySales();
-        Assert.assertEquals(product1.getName(), orden.get(0).getName());
+        Assert.assertEquals("coca", orden.get(0).getName());
     }
     @Test
     public void test3() {
@@ -78,7 +89,7 @@ public class ProductManagerTest {
         pm.processOrder();
         pm.processOrder();
         List<Product> orden = pm.getProductBySales();
-        Assert.assertEquals(product2.getName(),orden.get(1).getName());
+        Assert.assertEquals("pan",orden.get(1).getName());
     }
     @Test
     public void test5(){

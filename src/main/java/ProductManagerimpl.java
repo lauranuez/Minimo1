@@ -5,28 +5,46 @@ import Classes.Product;
 import java.util.*;
 
 public class ProductManagerimpl implements ProductManager{
+
     private Queue<Order> pendingOrder = new LinkedList<>();
-    private List<Product> listProduct;
+    private List<Product> listProduct = new ArrayList<>();
     private HashMap<String, User > hmUsers = new HashMap<String,User>();
     private int cont = 0;
 
-   public ProductManagerimpl () {
-       Product product1 = new Product("coca", 2);
-       Product product2 = new Product("pan", 1);
-       Product product3 = new Product("bocadillo de lomo", 4);
-       Product product4 = new Product("patatas", 3);
+    private static ProductManager instance;
 
-       listProduct = new ArrayList<>();
-       listProduct.add(product1);
-       listProduct.add(product2);
-       listProduct.add(product3);
-       listProduct.add(product4);
+   private ProductManagerimpl () {}
 
-       User user = new User("Juan");
-       User user2 = new User("Maria");
-       hmUsers.put("Juan", user);
-       hmUsers.put("Maria", user2);
+   public void addProduct(Product p){
+       listProduct.add(p);
    }
+
+   public void addUser(User user){
+       hmUsers.put(user.getId(),user);
+   }
+
+   public User getUser(String name){
+       return hmUsers.get(name);
+   }
+
+   public Product getProduct(String name){
+       return null;
+   }
+
+   public void clear(){
+
+       listProduct.clear();
+       hmUsers.clear();
+       pendingOrder.clear();
+
+   }
+
+    public static ProductManager getInstance() {
+        if (instance==null) instance = new ProductManagerimpl();
+        return instance;
+    }
+
+    public List<Product> getListProduct(){return listProduct;}
 
     @Override
     public List<Product> getProductByPrize() {
@@ -61,6 +79,8 @@ public class ProductManagerimpl implements ProductManager{
     @Override
     public void newOrder(Order o) {
         User user = hmUsers.get(o.getUserName());
+        if (user == null)
+            System.out.println("usuari " + o.getUserName() + " no existeix");
         user.addOrder(o);
         pendingOrder.add(o);
 
